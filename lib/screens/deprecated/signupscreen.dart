@@ -90,8 +90,8 @@ class Signupscreen extends StatelessWidget {
               ),
             ),
             const Expanded(
-              child: SizedBox(),
               flex: 1,
+              child: SizedBox(),
             ),
           ],
         ),

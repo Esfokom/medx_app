@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medx/screens/Medical/new_record.dart';
 import 'package:medx/screens/Onboarding.dart';
 import 'package:medx/screens/Medical/medical_screens.dart';
 import 'package:medx/screens/Personal/personal_screens.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           fillColor: Colors.white,
           filled: true,
           border: OutlineInputBorder(
@@ -54,12 +56,26 @@ class MyApp extends StatelessWidget {
       ),
       home: const OnboardingScreen(),
       routes: {
-        'onboarding': (context) => OnboardingScreen(),
-        'personal': (context) => PersonalScreen(),
-        'medical': (context) => MedicalScreen(),
-        'medical_login': (context) => MedicalLogin(),
-        'medical_signup': (context) => MedicalSignup(),
-        'medical_main_screen': (context) => MedicalMainScreen(),
+        'onboarding': (context) => const OnboardingScreen(),
+        'personal': (context) => const PersonalScreen(),
+        'medical': (context) => const MedicalScreen(),
+        'medical_login': (context) => const MedicalLogin(),
+        'medical_signup': (context) => const MedicalSignup(),
+        'medical_main_screen': (context) => const MedicalMainScreen(),
+        'profile_screen_med': (context) => const ProfileScreenMed(),
+        'patient_database': (context) => const PatientDatabase(),
+        'id_search': (context) => const IdSearch(),
+        'medical_patient_profile': (context) => const MedicalPatientProfile(),
+        'patient_record': (context) => const PatientRecord(),
+        'patient_request': (context) => const PatientRequest(),
+        'personal_patients': (context) => const PersonalPatients(),
+        'requests': (context) => const Requests(),
+        'new_record': (context) => const NewRecord(),
+        'personal_login': (context) => const PersonalLogin(),
+        'personal_signup': (context) => const PersonalSignup(),
+        'personal_main_screen': (context) => const PersonalMainScreen(),
+        'drug_record': (context) => const DrugRecord(),
+        'medical_record': (context) => const MedicalRecord()
       },
     );
   }

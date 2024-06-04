@@ -18,7 +18,9 @@ class OnboardingScreen extends StatelessWidget {
             ),
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, "personal");
+                },
                 child: Container(
                   color: Colors.red,
                   width: double.infinity,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Mainscreen extends StatelessWidget {
-  const Mainscreen({super.key});
+class PersonalMainScreen extends StatelessWidget {
+  const PersonalMainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,9 @@ class Mainscreen extends StatelessWidget {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "drug_record");
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black12,
                   minimumSize: const Size(250, 50),
@@ -53,7 +55,9 @@ class Mainscreen extends StatelessWidget {
                 height: 400,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "medical_record");
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black12,
                   minimumSize: const Size(250, 50),
