@@ -5,17 +5,40 @@ import 'package:medx/user_controls/next_button.dart';
 
 import 'MedicalInfo.dart';
 
-class FutureRecordWidget extends StatelessWidget {
+class FutureRecordWidget extends StatefulWidget {
   const FutureRecordWidget({super.key, required this.documentID});
   final String documentID;
 
+  @override
+  State<FutureRecordWidget> createState() => _FutureRecordWidgetState();
+
+  static TextStyle cardFieldTextStyle =
+      GoogleFonts.poppins(fontWeight: FontWeight.w500);
+  static TextStyle cardDetailTextStyle =
+      GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600);
+  static BoxDecoration cardDecoration = BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: [
+        BoxShadow(
+            color: Colors.black54,
+            blurStyle: BlurStyle.normal,
+            blurRadius: 10,
+            offset: Offset(0, 3),
+            spreadRadius: 0)
+      ],
+      gradient: LinearGradient(
+          colors: [Colors.grey.shade50, Colors.grey.shade300],
+          begin: Alignment.topCenter));
+}
+
+class _FutureRecordWidgetState extends State<FutureRecordWidget> {
   @override
   Widget build(BuildContext context) {
     CollectionReference records =
         FirebaseFirestore.instance.collection('records');
 
     return FutureBuilder(
-        future: records.doc(documentID).get(),
+        future: records.doc(widget.documentID).get(),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
@@ -23,7 +46,7 @@ class FutureRecordWidget extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
-                decoration: cardDecoration,
+                decoration: FutureRecordWidget.cardDecoration,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -58,7 +81,7 @@ class FutureRecordWidget extends StatelessWidget {
                       child: NextButton(
                         formValid: true,
                         onTap: () async {
-                          await deleteRecord();
+                          //await deleteRecord();
                         },
                         text: "Delete record",
                         color: Colors.black,
@@ -77,26 +100,18 @@ class FutureRecordWidget extends StatelessWidget {
   }
 
   Future<void> deleteRecord() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     CollectionReference records =
         FirebaseFirestore.instance.collection('records');
-    await records.doc(documentID).delete();
+    await records.doc(widget.documentID).delete();
+    setState(() {});
+    Navigator.pop(context);
   }
-
-  static TextStyle cardFieldTextStyle =
-      GoogleFonts.poppins(fontWeight: FontWeight.w500);
-  static TextStyle cardDetailTextStyle =
-      GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w600);
-  static BoxDecoration cardDecoration = BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: [
-        BoxShadow(
-            color: Colors.black54,
-            blurStyle: BlurStyle.normal,
-            blurRadius: 10,
-            offset: Offset(0, 3),
-            spreadRadius: 0)
-      ],
-      gradient: LinearGradient(
-          colors: [Colors.grey.shade50, Colors.grey.shade300],
-          begin: Alignment.topCenter));
 }

@@ -29,8 +29,15 @@ class _RecordsState extends State<Records> {
         return ListView.builder(
           itemCount: docIds.length,
           itemBuilder: (context, index) {
-            return FutureRecordWidget(
-              documentID: docIds[index],
+            return GestureDetector(
+              onLongPress: () async {
+                // CollectionReference records =
+                //     FirebaseFirestore.instance.collection('records');
+                // await records.doc(docIds[index]).delete();
+              },
+              child: FutureRecordWidget(
+                documentID: docIds[index],
+              ),
             );
           },
         );

@@ -136,13 +136,13 @@ class _NewRecordState extends State<NewRecord> {
                 ),
                 NextButton(
                   formValid: formValid,
-                  onTap: () {
+                  onTap: () async {
                     if (clicked) return;
                     if (!formValid) return;
                     setState(() {
                       clicked = true;
                     });
-                    FirebaseFirestore.instance.collection('records').add({
+                    await FirebaseFirestore.instance.collection('records').add({
                       'title': title.text,
                       'doctorName': doctorName.text,
                       'hospital': hospital.text,
