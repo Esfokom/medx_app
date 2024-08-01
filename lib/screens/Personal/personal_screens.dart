@@ -1,6 +1,10 @@
 export 'PersonalScreen.dart';
-export 'personal_login.dart';
-export 'personal_signup.dart';
+export 'auth/personal_login.dart';
+export 'auth/personal_signup.dart';
 export 'personal_main_screen.dart';
-export 'medical_record.dart';
-export 'drug_record.dart';
+export 'Top-Level-Tabs/profile/personal_profile.dart';
+export 'medical_data.dart';
+export 'Top-Level-Tabs/home/personal_home.dart';
+export 'Top-Level-Tabs/records/personal_records.dart';
+export 'Top-Level-Tabs/notifications/personal_notifications.dart';
+export 'Top-Level-Tabs/messaging/personal_messaging.dart';

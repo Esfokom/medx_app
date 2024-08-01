@@ -1,3 +1,10 @@
 export 'MedicalInfo.dart';
 export 'PatientRecordWidget.dart';
 export 'PatientRequestWidget.dart';
+export 'custom_field_with_pretext.dart';
+export 'next_button.dart';
+export 'future_record_widget.dart';
+export 'custom_email_field.dart';
+export 'dialog_field.dart';
+export 'custom_two_way_selection.dart';
+export 'telephone_field.dart';

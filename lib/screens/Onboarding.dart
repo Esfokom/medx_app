@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../user_controls/next_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -14,45 +17,49 @@ class OnboardingScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 6,
-              child: Image.asset("assets/images/MedX logo.png"),
+              child: Center(
+                  child: Image.asset(
+                "assets/images/MedX logo.png",
+                height: 300,
+              )),
             ),
             Expanded(
-              child: InkWell(
+              child: Text(
+                "Onboarding",
+                style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 40, left: 40),
+              child: NextButton(
+                formValid: true,
                 onTap: () {
                   Navigator.pushNamed(context, "personal");
                 },
-                child: Container(
-                  color: Colors.red,
-                  width: double.infinity,
-                  child: const Center(
-                      child: Text(
-                    "Personal",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 30),
-                  )),
-                ),
+                text: "Personal",
               ),
             ),
-            Expanded(
-                child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, "medical");
-              },
-              child: Container(
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 40, left: 40),
+              child: NextButton(
                 color: Colors.black,
-                width: double.infinity,
-                child: const Center(
-                    child: Text(
-                  "Medical",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 30),
-                )),
+                formValid: true,
+                onTap: () {
+                  Navigator.pushNamed(context, "medical");
+                },
+                text: "Medical",
               ),
-            ))
+            ),
+            const Expanded(
+              flex: 2,
+              child: SizedBox(),
+            )
           ],
         ),
       ),

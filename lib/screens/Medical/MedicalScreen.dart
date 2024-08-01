@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:medx/user_controls/next_button.dart';
 
 class MedicalScreen extends StatelessWidget {
   const MedicalScreen({super.key});
@@ -15,39 +17,44 @@ class MedicalScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 6,
-              child: Image.asset("assets/images/MedX logo.png"),
+              child: Center(
+                  child: Image.asset(
+                "assets/images/MedX logo.png",
+                height: 300,
+              )),
             ),
-            const Expanded(
+            Expanded(
               child: Text(
                 "Medical",
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 40,
                     fontWeight: FontWeight.w700),
               ),
             ),
-            Expanded(
-                child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "medical_login");
-              },
-              child: const Text(
-                "Log In",
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.only(right: 40, left: 40),
+              child: NextButton(
+                formValid: true,
+                color: Colors.black,
+                onTap: () {
+                  Navigator.pushNamed(context, "medical/login");
+                },
+                text: "Log In",
               ),
-            )),
+            ),
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "medical_signup");
+            Padding(
+              padding: const EdgeInsets.only(right: 40, left: 40),
+              child: NextButton(
+                formValid: true,
+                color: Colors.black,
+                onTap: () {
+                  Navigator.pushNamed(context, "medical/signup");
                 },
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 20),
-                ),
+                text: "Sign Up",
               ),
             ),
             const Expanded(

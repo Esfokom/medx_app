@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../user_controls/user_controls.dart';
 
 class PersonalScreen extends StatelessWidget {
   const PersonalScreen({super.key});
@@ -11,50 +13,56 @@ class PersonalScreen extends StatelessWidget {
           backgroundColor: Colors.red,
           foregroundColor: Colors.white,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              flex: 6,
-              child: Image.asset("assets/images/MedX logo.png"),
-            ),
-            const Expanded(
-              child: Text(
-                "Personal",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            Expanded(
-                child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "personal_login");
-              },
-              child: const Text(
-                "Log In",
-                style: TextStyle(fontSize: 20),
-              ),
-            )),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "personal_signup");
-                },
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 20),
+        body: Center(
+          child: Column(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Center(
+                  child: Image.asset(
+                    "assets/images/MedX logo.png",
+                    height: 300,
+                  ),
                 ),
               ),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(),
-            )
-          ],
+              Expanded(
+                child: Text(
+                  "Personal",
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 40, left: 40),
+                child: NextButton(
+                  formValid: true,
+                  onTap: () {
+                    Navigator.pushNamed(context, "personal/login");
+                  },
+                  text: "Log In",
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 40, left: 40),
+                child: NextButton(
+                  formValid: true,
+                  onTap: () {
+                    Navigator.pushNamed(context, "personal/signup");
+                  },
+                  text: "Sign Up",
+                ),
+              ),
+              const Expanded(
+                flex: 2,
+                child: SizedBox(),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,10 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:medx/AuthWrapper.dart';
+import 'package:medx/providers/doctor_provider.dart';
+import 'package:medx/providers/user_provider.dart';
 import 'package:medx/screens/Medical/new_record.dart';
-import 'package:medx/screens/Onboarding.dart';
 import 'package:medx/screens/Medical/medical_screens.dart';
+import 'package:medx/screens/Onboarding.dart';
 import 'package:medx/screens/Personal/personal_screens.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -14,69 +25,64 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        primaryColor: Colors.red,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-            backgroundColor: WidgetStateProperty.all(Colors.red),
-            minimumSize: WidgetStateProperty.all(
-              const Size(250, 50),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DoctorProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'MedX',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
+          primaryColor: Colors.redAccent,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+              backgroundColor: WidgetStateProperty.all(Colors.red),
+              minimumSize: WidgetStateProperty.all(
+                const Size(250, 50),
+              ),
             ),
           ),
-        ),
-        inputDecorationTheme: const InputDecorationTheme(
-          fillColor: Colors.white,
-          filled: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.zero),
+          inputDecorationTheme: const InputDecorationTheme(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.zero),
+            ),
           ),
+          useMaterial3: true,
         ),
-
-        useMaterial3: true,
+        home: const AuthWrapper(),
+        routes: {
+          'personal': (context) => const PersonalScreen(),
+          'medical': (context) => const MedicalScreen(),
+          'medical/login': (context) => const MedicalLogin(),
+          'medical/signup': (context) => const MedicalSignup(),
+          'medical/main': (context) => const MedicalMainScreen(),
+          'personal/login': (context) => const PersonalLogin(),
+          'personal/signup': (context) => const PersonalSignup(),
+          'personal/main': (context) => const PersonalMainScreen(),
+          'onboarding': (context) => const OnboardingScreen(),
+          'profile_screen_med': (context) => const ProfileScreenMed(),
+          'patient_database': (context) => const PatientDatabase(),
+          'id_search': (context) => const IdSearch(),
+          'medical_patient_profile': (context) => const MedicalPatientProfile(),
+          'patient_record': (context) => const PatientRecord(),
+          'patient_request': (context) => const PatientRequest(),
+          'personal_patients': (context) => const PersonalPatients(),
+          'requests': (context) => const Requests(),
+          'new_record': (context) => const NewRecord(),
+          'personal_profile': (context) => const PersonalProfile(),
+          'medical_data': (context) => const MedicalData(),
+          'records': (context) => const Records(),
+        },
       ),
-      home: const OnboardingScreen(),
-      routes: {
-        'onboarding': (context) => const OnboardingScreen(),
-        'personal': (context) => const PersonalScreen(),
-        'medical': (context) => const MedicalScreen(),
-        'medical_login': (context) => const MedicalLogin(),
-        'medical_signup': (context) => const MedicalSignup(),
-        'medical_main_screen': (context) => const MedicalMainScreen(),
-        'profile_screen_med': (context) => const ProfileScreenMed(),
-        'patient_database': (context) => const PatientDatabase(),
-        'id_search': (context) => const IdSearch(),
-        'medical_patient_profile': (context) => const MedicalPatientProfile(),
-        'patient_record': (context) => const PatientRecord(),
-        'patient_request': (context) => const PatientRequest(),
-        'personal_patients': (context) => const PersonalPatients(),
-        'requests': (context) => const Requests(),
-        'new_record': (context) => const NewRecord(),
-        'personal_login': (context) => const PersonalLogin(),
-        'personal_signup': (context) => const PersonalSignup(),
-        'personal_main_screen': (context) => const PersonalMainScreen(),
-        'drug_record': (context) => const DrugRecord(),
-        'medical_record': (context) => const MedicalRecord()
-      },
     );
   }
 }

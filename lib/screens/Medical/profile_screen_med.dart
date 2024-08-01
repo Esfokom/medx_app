@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medx/ThemeDictionary.dart';
+import 'package:medx/screens/Onboarding.dart';
+import 'package:medx/user_controls/next_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreenMed extends StatelessWidget {
   const ProfileScreenMed({super.key});
@@ -12,7 +15,7 @@ class ProfileScreenMed extends StatelessWidget {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
@@ -85,9 +88,25 @@ class ProfileScreenMed extends StatelessWidget {
                         Text(
                           "stephamadede@gmail.com",
                           style: ThemeDictionary.blackText,
-                        )
+                        ),
                       ],
                     ),
+                    NextButton(
+                      formValid: true,
+                      text: "Logout",
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setBool("isMedicalLogin", false);
+                        prefs.setBool("isPersonalLogin", false);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OnboardingScreen(),
+                            ),
+                            (route) => false);
+                      },
+                    )
                   ],
                 ),
               )
