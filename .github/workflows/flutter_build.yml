@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:   # Add this line to enable manual triggers
 
 jobs:
   build:
@@ -33,3 +34,4 @@ jobs:
     - name: Build iOS (if on macOS)
       if: runner.os == 'macOS'
       run: flutter build ios --release --no-codesign
+
